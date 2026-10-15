@@ -207,6 +207,42 @@
     .end-actions { display: flex; gap: 10px; flex-wrap: wrap; }
     .end-actions .btn { flex: 1; }
 
+    /* ---------- Player name ---------- */
+    .name-form { display: flex; gap: 8px; margin-bottom: 8px; }
+    .name-error { font-family: var(--mono); font-size: 12px; color: var(--red); min-height: 18px; margin-bottom: 8px; }
+    .name-note { font-size: 13px; color: var(--muted); }
+    .player-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
+      padding: 10px 14px; margin-bottom: 20px; font-family: var(--mono); font-size: 14px;
+    }
+    .player-row strong { color: var(--green); }
+    .link-btn {
+      background: none; border: none; color: var(--cyan); cursor: pointer;
+      font-family: var(--mono); font-size: 12px; text-decoration: underline; padding: 0;
+    }
+    .player-tag { color: var(--green); }
+
+    /* ---------- Leaderboard ---------- */
+    .board { margin-top: 22px; }
+    .board-tabs { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+    .board-tab {
+      background: var(--panel-2); color: var(--muted); border: 1px solid var(--line);
+      border-radius: 999px; padding: 5px 12px; font-family: var(--mono); font-size: 12px; cursor: pointer;
+    }
+    .board-tab.active { color: var(--bg); background: var(--cyan); border-color: var(--cyan); }
+    .board-list { list-style: none; display: grid; gap: 6px; }
+    .board-list li {
+      display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center;
+      background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px;
+      padding: 9px 12px; font-family: var(--mono); font-size: 14px;
+    }
+    .board-list li.me { border-color: var(--yellow); background: rgba(250,204,21,0.08); }
+    .board-list .rank { color: var(--muted); }
+    .board-list .who { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .board-list .pts { color: var(--yellow); font-weight: 800; }
+    .board-empty { font-size: 13px; color: var(--muted); font-family: var(--mono); padding: 8px 0; }
+
     @media (max-width: 480px) {
       .content { padding: 20px; }
       .logo { font-size: 28px; }
@@ -394,10 +430,64 @@
       try { localStorage.setItem("tagquest-best-" + mode, String(value)); } catch (e) {}
     }
 
+    // Keeps player names safe to show inside the page
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    // Player name (saved in this browser)
+    function getPlayer() {
+      try { return localStorage.getItem("tagquest-player") || ""; } catch (e) { return ""; }
+    }
+    function savePlayer(name) {
+      try { localStorage.setItem("tagquest-player", name); } catch (e) {}
+    }
+
+    // Leaderboard: top 5 scores per mode (saved in this browser)
+    function getBoard(mode) {
+      try { return JSON.parse(localStorage.getItem("tagquest-board-" + mode)) || []; } catch (e) { return []; }
+    }
+    function addToBoard(mode, name, points) {
+      const entry = { name, score: points, time: Date.now() };
+      const board = getBoard(mode).concat(entry)
+        .sort((a, b) => b.score - a.score || a.time - b.time)
+        .slice(0, 5);
+      try { localStorage.setItem("tagquest-board-" + mode, JSON.stringify(board)); } catch (e) {}
+      return { board, rank: board.indexOf(entry) }; // rank -1 means it didn't make the top 5
+    }
+
+    function boardHtml(mode, highlightIdx) {
+      const board = getBoard(mode);
+      if (!board.length) return `<div class="board-empty">no scores yet. be the first!</div>`;
+      const medals = ["🥇", "🥈", "🥉", "4", "5"];
+      return `<ol class="board-list">${board.map((e, i) => `
+        <li class="${i === highlightIdx ? "me" : ""}">
+          <span class="rank">${medals[i]}</span>
+          <span class="who">${escapeHtml(e.name)}</span>
+          <span class="pts">${e.score}</span>
+        </li>`).join("")}</ol>`;
+    }
+
+    // Leaderboard block with Easy / Normal / Hard tabs
+    function renderBoard(container, activeMode, highlightIdx) {
+      container.innerHTML = `
+        <div class="section-label">leaderboard</div>
+        <div class="board-tabs">
+          ${Object.entries(MODES).map(([key, m]) =>
+            `<button class="board-tab ${key === activeMode ? "active" : ""}" data-mode="${key}">${m.label}</button>`).join("")}
+        </div>
+        <div id="board-body">${boardHtml(activeMode, highlightIdx)}</div>
+      `;
+      container.querySelectorAll(".board-tab").forEach(tab => {
+        tab.onclick = () => renderBoard(container, tab.dataset.mode, tab.dataset.mode === activeMode ? highlightIdx : -1);
+      });
+    }
+
     /* =========================================================
        GAME STATE
        ========================================================= */
     let mode, questions, current, score, lives, correctCount;
+    let playerName = getPlayer();
     let timerId = null, timeLeft = 0;
 
     /* =========================================================
@@ -408,9 +498,16 @@
       const badge = $("mode-badge");
       badge.hidden = true;
 
+      // New player? Ask for a name first
+      if (!playerName) { showNameScreen(); return; }
+
       app.innerHTML = `
         <div class="logo"><span class="br">&lt;</span><span class="nm">TagQuest</span><span class="br"> /&gt;</span></div>
         <div class="terminal"><span class="prompt-sign">$</span> <span id="typed"></span><span class="cursor"></span></div>
+        <div class="player-row">
+          <span>player: <strong>${escapeHtml(playerName)}</strong></span>
+          <button class="link-btn" id="change-player">change player</button>
+        </div>
         <div class="section-label">choose your difficulty</div>
         <div class="modes">
           ${Object.entries(MODES).map(([key, m]) => `
@@ -420,11 +517,49 @@
               <span class="mode-best">best<strong>${getBest(key)}</strong></span>
             </button>`).join("")}
         </div>
+        <div class="board" id="board"></div>
       `;
       app.querySelectorAll(".mode-card").forEach(btn => {
         btn.onclick = () => startGame(btn.dataset.mode);
       });
-      typeLine("learn HTML one tag at a time");
+      $("change-player").onclick = showNameScreen;
+      renderBoard($("board"), "easy", -1);
+      typeLine("welcome back, " + playerName + "!");
+    }
+
+    /* =========================================================
+       NAME SCREEN
+       ========================================================= */
+    function showNameScreen() {
+      stopTimer();
+      $("mode-badge").hidden = true;
+      app.innerHTML = `
+        <div class="logo"><span class="br">&lt;</span><span class="nm">TagQuest</span><span class="br"> /&gt;</span></div>
+        <div class="terminal"><span class="prompt-sign">$</span> <span id="typed"></span><span class="cursor"></span></div>
+        <div class="section-label">enter your player name</div>
+        <form class="name-form" id="name-form" autocomplete="off">
+          <input type="text" id="name-input" maxlength="16" placeholder="e.g. CodeNinja" aria-label="Player name" spellcheck="false" />
+          <button class="btn btn-cyan" type="submit">Start →</button>
+        </form>
+        <div class="name-error" id="name-error" role="alert"></div>
+        <p class="name-note">Your name shows on the leaderboard. 2 to 16 characters.</p>
+      `;
+      const input = $("name-input");
+      input.value = playerName;
+      input.focus();
+      $("name-form").onsubmit = e => {
+        e.preventDefault();
+        const name = input.value.trim().replace(/\s+/g, " ");
+        if (name.length < 2) {
+          $("name-error").textContent = "// name needs at least 2 characters";
+          input.focus();
+          return;
+        }
+        playerName = name;
+        savePlayer(name);
+        showStart();
+      };
+      typeLine("who's playing today?");
     }
 
     // Terminal typing effect
@@ -473,6 +608,7 @@
 
       app.innerHTML = `
         <div class="stats">
+          <span class="player-tag">${escapeHtml(playerName)}</span>
           <span>score: <strong id="score">0</strong></span>
           <span>lives: <strong id="lives"></strong></span>
         </div>
@@ -676,13 +812,16 @@
       const oldBest = getBest(mode);
       const isNewBest = score > oldBest;
       if (isNewBest) setBest(mode, score);
+      const { rank } = score > 0 ? addToBoard(mode, playerName, score) : { rank: -1 };
+      const safeName = escapeHtml(playerName);
 
       app.innerHTML = `
         <div class="end-title">${won ? "🎉 Quest complete!" : "💀 Game over"}</div>
         <p class="end-sub">${won
-          ? "Great job, you know your tags!"
-          : "You ran out of lives. Review the tags and try again!"}</p>
+          ? `Great job, ${safeName}! You know your tags!`
+          : `Nice try, ${safeName}! Review the tags and try again.`}</p>
         ${isNewBest ? `<div class="new-best">★ new best score for ${MODES[mode].label} mode!</div>` : ""}
+        ${rank >= 0 ? `<div class="new-best">🏆 you're #${rank + 1} on the ${MODES[mode].label} leaderboard!</div>` : ""}
         <div class="end-stats">
           <div class="end-stat"><span>score</span><strong>${score}</strong></div>
           <div class="end-stat"><span>correct</span><strong>${correctCount}/${questions.length}</strong></div>
@@ -692,7 +831,9 @@
           <button class="btn btn-cyan" id="again-btn">Play Again</button>
           <button class="btn btn-ghost" id="modes-btn">Change Mode</button>
         </div>
+        <div class="board" id="board"></div>
       `;
+      renderBoard($("board"), mode, rank);
       $("again-btn").onclick = () => startGame(mode);
       $("modes-btn").onclick = showStart;
     }
