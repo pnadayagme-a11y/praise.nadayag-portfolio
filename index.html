@@ -692,7 +692,7 @@
         <div class="buttons">
           <a href="#projects" class="btn btn-primary">View my projects</a>
           <a href="#contact" class="btn btn-ghost">Let's work together</a>
-          <a href="Praise-nadayag-cv.pdf" download="Praise Nadayag CV.pdf" class="btn btn-ghost">download_cv() ↓</a>
+          <a href="Praise%20nadayag%20new.pdf" download="Praise Nadayag CV.pdf" class="btn btn-ghost">download_cv() ↓</a>
         </div>
       </div>
 
@@ -881,7 +881,7 @@
         <div class="buttons" style="justify-content: center;">
           <!-- Opens Gmail in a new tab, so it works even without an email app installed -->
           <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=pnadayag.work@gmail.com&amp;su=Website%20project%20inquiry" class="btn btn-primary" target="_blank" rel="noopener">Send me an email</a>
-          <a href="Praise-nadayag-cv.pdf" download="Praise Nadayag CV.pdf" class="btn btn-ghost">Download my CV ↓</a>
+          <a href="Praise%20nadayag%20new.pdf" download="Praise Nadayag CV.pdf" class="btn btn-ghost">Download my CV ↓</a>
           <button type="button" class="btn btn-ghost" id="copyEmail" style="background: none; font: inherit; font-family: var(--mono); font-weight: 600; font-size: 0.92rem;">copy_email()</button>
         </div>
         <p class="comment" style="margin-top: 14px;">// or use your email app: <a href="mailto:pnadayag.work@gmail.com">pnadayag.work@gmail.com</a></p>
@@ -922,6 +922,9 @@
   <script>
     document.documentElement.classList.add("js");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ----- CV file name (change it here if you rename the PDF) ----- */
+    const CV_FILE = "Praise%20nadayag%20new.pdf";
 
     /* ----- 1. Glowing arrow follows the mouse ----- */
     const arrow = document.querySelector(".cursor-arrow");
@@ -1029,7 +1032,7 @@
       contact: "You can reach Praise here:<ul><li>📧 " + emailLink + "</li><li>📱 <a href='tel:09351265931'>0935 126 5931</a></li><li>📍 Iligan City, Lanao del Norte, Philippines</li></ul>",
       hire: "Yes, Praise is <b>available for projects</b>! 🚀 If you need a booking website or any site built, email him at " + emailLink + " with a short description of what you need.",
       pricing: "Pricing depends on the features you need (calendar, payments, email receipts, and so on). Email Praise at " + emailLink + " with your project details and he'll send you a quote.",
-      cv: "Sure! 📄 You can <a href='Praise-nadayag-cv.pdf' download='Praise Nadayag CV.pdf'>download Praise's CV here</a>. It has his experience, projects, skills and education.",
+      cv: "Sure! 📄 You can <a href='" + CV_FILE + "' download='Praise Nadayag CV.pdf'>download Praise's CV here</a>. It has his experience, projects, skills and education.",
       location: "Praise is based in <b>Iligan City, Lanao del Norte, Philippines</b> 🇵🇭",
       thanks: "You're welcome! 😊 Anything else you'd like to know?",
       fallback: "Hmm, I'm not sure about that one. 🤔 Try asking about Praise's <b>skills</b>, <b>experience</b>, <b>projects</b>, or how to <b>contact</b> him. You can also tap a button below."
