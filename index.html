@@ -1129,11 +1129,64 @@
       }, reduceMotion ? 0 : 650);
     }
 
-    function askBot(text) {
+    /* ----- AI chat (Gemini via /api/chat), falls back to keyword answers ----- */
+    const chatHistory = []; // remembers the conversation so the AI has context
+
+    // Makes the AI's text safe, then adds **bold**, links, emails and line breaks
+    function formatBotText(text) {
+      let safe = text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      safe = safe.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+      safe = safe.replace(/(https?:\/\/[^\s<]+[^\s<.,!?)])/g, "<a href='$1' target='_blank' rel='noopener'>$1</a>");
+      safe = safe.replace(/([\w.+-]+@[\w-]+\.[\w.]+[\w])/g, "<a href='mailto:$1'>$1</a>");
+      safe = safe.replace(/\n/g, "<br>");
+      return safe;
+    }
+
+    function showTyping() {
+      const typing = document.createElement("div");
+      typing.className = "msg bot typing";
+      typing.setAttribute("aria-label", "Assistant is typing");
+      typing.innerHTML = "<span></span><span></span><span></span>";
+      chatLog.appendChild(typing);
+      scrollChat();
+      return typing;
+    }
+
+    async function askBot(text) {
       const trimmed = text.trim();
       if (!trimmed) return;
+
       addMessage(trimmed, "user");
-      botReply(findIntent(trimmed));
+      chatHistory.push({ role: "user", content: trimmed });
+
+      chatInput.disabled = true;
+      const typing = showTyping();
+
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          // last 9 messages always starts with a visitor message
+          body: JSON.stringify({ messages: chatHistory.slice(-9) })
+        });
+        if (!response.ok) throw new Error("AI unavailable");
+
+        const data = await response.json();
+        typing.remove();
+        addMessage(formatBotText(data.reply), "bot");
+        chatHistory.push({ role: "assistant", content: data.reply });
+      } catch (error) {
+        // Backup plan: use the old keyword answers
+        typing.remove();
+        chatHistory.pop();
+        addMessage(replies[findIntent(trimmed)], "bot");
+      } finally {
+        chatInput.disabled = false;
+        if (window.matchMedia("(pointer: fine)").matches) chatInput.focus();
+      }
     }
 
     quickReplies.forEach(function (item) {
