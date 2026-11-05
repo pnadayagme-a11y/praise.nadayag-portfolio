@@ -459,6 +459,14 @@
     .project-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     .project-actions small { font-family: var(--mono); color: var(--muted); font-size: 0.78rem; }
 
+    .project.featured.seasonal { border-color: rgba(255, 122, 26, 0.45); box-shadow: 0 0 30px rgba(255, 122, 26, 0.12); }
+    .project.featured.seasonal:hover { border-color: #ff7a1a; box-shadow: 0 0 30px rgba(255, 122, 26, 0.22); }
+    .live { white-space: nowrap; }
+    .window-head .path { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .live.season-tag { color: #ff7a1a; text-shadow: 0 0 8px #ff7a1a; }
+    .seasonal .feature-list span { color: #ff7a1a; text-shadow: 0 0 8px #ff7a1a; }
+    .seasonal .shot:hover { border-color: #ff7a1a; }
+
     /* ========== KLX PAGES GALLERY ========== */
     .klx-pages { grid-column: 1 / -1; }
     .pages-title { font-family: var(--mono); color: var(--muted); font-size: 0.85rem; margin: 4px 0 12px; }
@@ -819,7 +827,7 @@
           <div class="stats">
             <div class="stat"><b>1.5</b><span>years building websites</span></div>
             <div class="stat"><b>24/7</b><span>bookings, even while you sleep</span></div>
-            <div class="stat"><b>3</b><span>projects built, 2 live</span></div>
+            <div class="stat"><b>4</b><span>projects built, 3 live</span></div>
             <div class="stat"><b>PH</b><span>Philippines-based, works remote</span></div>
           </div>
         </div>
@@ -910,6 +918,38 @@
               </div>
             </div>
             <a class="btn btn-primary visit" href="https://klxphotobooth.space" target="_blank" rel="noopener">visit_site() →</a>
+          </div>
+        </article>
+
+        <!-- Landing page: KLX Halloween campaign -->
+        <article class="window project featured seasonal reveal">
+          <div class="window-head">
+            <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span class="path">klxphotobooth.space/halloween</span>
+            <span class="live season-tag">● LANDING PAGE</span>
+          </div>
+          <div class="project-body featured-body">
+            <a class="shot" href="https://klxphotobooth.space/halloween" target="_blank" rel="noopener" aria-label="Open the KLX Halloween landing page">
+              <img src="klx-halloween-preview.jpg" alt="Screenshot of the KLX Trick or Receipt Halloween landing page" loading="lazy" width="1600" height="900">
+            </a>
+            <div>
+              <div class="project-emoji" aria-hidden="true">🎃🧾</div>
+              <h3>KLX Halloween Landing Page: "Trick or Receipt!"</h3>
+              <p>A seasonal campaign page that drives Halloween party bookings for KLX. It keeps the receipt look of the main site, adds a spooky hero with a flashlight effect, fog and cobwebs, and sends every "Book" button straight to the live booking calendar. A promo countdown and a Trick or Treat fortune machine keep visitors scrolling until they book.</p>
+              <div class="tags"><span>Landing Page</span><span>Campaign</span><span>Web Audio</span><span>Animations</span><span>Countdown Timer</span><span>Facebook Link Preview</span></div>
+            </div>
+            <ul class="feature-list">
+              <li><span>✓</span> Flashlight hero that follows the cursor</li>
+              <li><span>✓</span> Suspense music made in the browser, no audio files</li>
+              <li><span>✓</span> Tap-to-print Trick or Treat fortunes</li>
+              <li><span>✓</span> Live promo countdown</li>
+              <li><span>✓</span> Rates and all Book buttons linked to the calendar</li>
+              <li><span>✓</span> Custom preview when shared on Facebook</li>
+            </ul>
+            <div class="project-actions">
+              <a class="btn btn-primary" href="https://klxphotobooth.space/halloween" target="_blank" rel="noopener">view_page() →</a>
+              <small>// turn your volume up</small>
+            </div>
           </div>
         </article>
 
@@ -1146,9 +1186,10 @@
       about: "<b>Praise Nadayag</b> is a website developer from Iligan City, Philippines, with <b>1.5 years</b> of experience. He builds <b>booking systems</b> with <b>online payment</b> and <b>email automation</b>: customers book and pay online, then get an email receipt once their booking is confirmed.",
       skills: "Here's what Praise works with:<ul><li>HTML5, CSS3 and JavaScript</li><li>Booking systems and email automation</li><li>Supabase for accounts and data</li><li>Responsive design that looks great on phones</li><li>GitHub and Vercel for code and deployment</li></ul>",
       experience: "Praise has <b>1.5 years</b> of experience building websites. His focus is booking systems and email automation. His live booking site is <b>KLX Receipt Photobooth</b>. He's also building <b>Tahanan</b>, a rental listing platform, and made <b>Tag Quest</b>, a game that teaches HTML.",
-      projects: "Here are Praise's projects:<ul><li><b>KLX Receipt Photobooth</b> (live): a booking website with a calendar, auto billing, QR payment and email confirmation</li><li><b>Tahanan</b> (in development): a rental listing platform for boarding houses and rooms in Iligan City</li><li><b>Tag Quest</b> (live): a game for students and beginners learning HTML</li></ul>Ask me about any of them!",
+      projects: "Here are Praise's projects:<ul><li><b>KLX Receipt Photobooth</b> (live): a booking website with a calendar, auto billing, QR payment and email confirmation</li><li><b>KLX Halloween landing page</b> (live): a \"Trick or Receipt\" campaign page with spooky effects and booking links</li><li><b>Tahanan</b> (in development): a rental listing platform for boarding houses and rooms in Iligan City</li><li><b>Tag Quest</b> (live): a game for students and beginners learning HTML</li></ul>Ask me about any of them!",
       tagquest: "<b>Tag Quest</b> 🎮 is a browser game for anyone who wants to learn or get familiar with HTML.<ul><li>Pick <b>Easy</b>, <b>Normal</b> or <b>Hard</b> mode</li><li>Answer tag challenges by choosing or typing the right tag</li><li>See the correct answer and a short explanation every time</li><li>Use 50/50 hints in Easy, beat the 20-second timer in Hard</li><li>Your best score is saved for each mode</li></ul>It's live, <a href='tag-quest.html' target='_blank' rel='noopener'>play it here</a>!",
       klx: "<b>KLX Receipt Photobooth</b> 🧾📸 is a full booking website for a photobooth business in Iligan City. Customers can:<ul><li>Pick an open date on a live calendar</li><li>Fill out a booking form with add-ons</li><li>See their total and 50% downpayment computed automatically</li><li>Pay by QR and upload proof of payment</li><li>Get their booking confirmation by email</li></ul>It also has gift certificate ordering and mini games. See it live at <a href='https://klxphotobooth.space' target='_blank' rel='noopener'>klxphotobooth.space</a>",
+      halloween: "<b>Trick or Receipt!</b> 🎃 is a Halloween landing page Praise built for KLX to get more party bookings.<ul><li>Spooky hero with a flashlight effect, fog and cobwebs</li><li>Suspense music made in the browser</li><li>A Trick or Treat fortune machine</li><li>Promo countdown, rates, and Book buttons linked to the booking calendar</li></ul><a href='https://klxphotobooth.space/halloween' target='_blank' rel='noopener'>See it here</a> (turn your volume up!)",
       tahanan: "<b>Tahanan</b> 🏠 is a rental listing platform for boarding houses, rooms and small houses in Iligan City, like Airbnb for local rentals.<ul><li>Owners create an account and post their place with photos, rates, house rules and a Google Maps pin</li><li>Owners choose their target tenants (students or workers)</li><li>Owners are verified with a valid ID and business permit</li><li>An admin approves listings before they go live</li></ul>It's <b>in development</b> right now, with the backend being built on Supabase. Launching soon!",
       booking: "Here's how Praise's booking websites work:<ul><li><b>1.</b> The customer books online, any time of day</li><li><b>2.</b> The system saves the booking automatically</li><li><b>3.</b> A receipt confirmation lands in their email within seconds</li></ul>No manual typing, no missed messages. Bookings 24/7, even while you sleep. 😴",
       contact: "You can reach Praise here:<ul><li>📧 " + emailLink + "</li><li>📱 <a href='tel:09351265931'>0935 126 5931</a></li><li>📍 Iligan City, Lanao del Norte, Philippines</li></ul>",
@@ -1163,6 +1204,7 @@
     // Keywords that point to each answer. Earlier topics win ties.
     const intents = [
       { id: "klx", words: ["klx", "photobooth", "photo booth", "klxphotobooth"] },
+      { id: "halloween", words: ["halloween", "trick", "treat", "landing page", "landing pages", "landing", "campaign", "promo", "spooky"] },
       { id: "tahanan", words: ["tahanan", "rental", "rentals", "rent", "boarding", "boarding house", "boarding houses", "room", "rooms", "dorm", "bedspace", "listing", "listings", "landlord", "tenant"] },
       { id: "cv", words: ["cv", "resume", "résumé", "curriculum vitae", "download cv", "download resume"] },
       { id: "tagquest", words: ["tag quest", "tagquest", "game", "games", "quiz", "learn html", "learning html", "student", "students", "beginner", "beginners", "play"] },
@@ -1185,6 +1227,7 @@
       { label: "🛠️ skills", question: "What are his skills?" },
       { label: "📂 projects", question: "Show me his projects" },
       { label: "🧾 KLX site", question: "Tell me about the KLX photobooth site" },
+      { label: "🎃 Halloween page", question: "Tell me about the Halloween landing page" },
       { label: "🏠 Tahanan", question: "Tell me about Tahanan" },
       { label: "🎮 Tag Quest", question: "Tell me about the Tag Quest game" },
       { label: "📄 CV", question: "Can I download his CV?" },
