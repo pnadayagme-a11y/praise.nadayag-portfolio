@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Praise Nadayag | Website Developer</title>
-  <meta name="description" content="Praise Nadayag, website developer in Iligan City, Philippines. I build booking websites with online payment and automatic email receipts.">
+  <meta name="description" content="Praise Nadayag builds mobile-friendly booking websites for service businesses, with online payments, automatic receipts and less time spent managing bookings.">
 
   <!-- Fonts: JetBrains Mono (code look) + Sora (headings) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +55,7 @@
     }
 
     a { color: var(--green); text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
     ::selection { background: var(--green); color: var(--bg); }
 
     /* ========== TOP BAR (looks like a code editor) ========== */
@@ -206,6 +207,9 @@
 
     .buttons { display: flex; flex-wrap: wrap; gap: 14px; }
     .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-family: var(--mono);
       font-weight: 600;
       font-size: 0.92rem;
@@ -471,11 +475,8 @@
     .klx-pages { grid-column: 1 / -1; }
     .pages-title { font-family: var(--mono); color: var(--muted); font-size: 0.85rem; margin: 4px 0 12px; }
     .page-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .page-tile { display: flex; flex-direction: column; gap: 4px; color: var(--text); padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel-2); transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
-    .page-tile:hover { border-color: var(--green); transform: translateY(-3px); box-shadow: 0 0 18px rgba(0, 255, 136, 0.15); }
-    .page-img { position: relative; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; background: linear-gradient(135deg, rgba(0,255,136,.08), rgba(97,218,251,.08)); display: grid; place-items: center; margin-bottom: 6px; }
-    .page-ph { font-size: 2.2rem; filter: drop-shadow(0 0 10px rgba(0,255,136,.4)); }
-    .page-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .page-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-height: 132px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel-2); }
+    .page-icon { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 10px; background: rgba(0, 255, 136, 0.08); font-size: 1.15rem; }
     .page-tile b { font-size: 0.95rem; }
     .page-tile small { font-family: var(--mono); color: var(--muted); font-size: 0.75rem; }
     @media (max-width: 820px) { .page-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -749,17 +750,17 @@
         <p class="comment">// hi, I'm Praise Nadayag 👋</p>
         <h1>Booking websites that <span class="gradient">book, collect payment and send receipts</span> for you</h1>
         <p class="terminal-line"><span class="prompt">&gt; </span><span id="typed">Website Developer</span><span class="caret" aria-hidden="true"></span></p>
-        <p class="hero-text">I'm a <b>website developer</b> from Iligan City with <b>1.5 years</b> of hands-on experience. I design and code <b>booking systems</b> where customers book on their phone, <b>pay online</b>, and get an <b>automatic email receipt</b> once their booking is confirmed. No more answering every inquiry by chat.</p>
+        <p class="hero-text">I'm a <b>website developer</b> from Iligan City with <b>1.5 years</b> of hands-on experience. I help service businesses turn inquiries into confirmed bookings with a mobile-friendly website that handles availability, online payments and customer emails—so you spend less time managing every booking by chat.</p>
         <div class="buttons">
           <a href="#contact" class="btn btn-primary">Get a website quote</a>
           <a href="#projects" class="btn btn-ghost">See my work</a>
-          <a href="Praise%20nadayag%20new.pdf" download="Praise Nadayag CV.pdf" class="btn btn-ghost">download_cv() ↓</a>
+          <a href="updated/Praise%20nadayag%20new.pdf" download="Praise Nadayag CV.pdf" class="btn btn-ghost">download_cv() ↓</a>
         </div>
-        <div class="trust"><span>Live sites for real businesses</span><span>Mobile-first design</span><span>Your own domain</span></div>
+        <div class="trust"><span>Live booking system for KLX</span><span>Mobile-first design</span><span>Remote-ready in the Philippines</span></div>
       </div>
 
       <div class="avatar reveal">
-        <img src="portfolio-profile.jpeg" alt="Photo of Praise Nadayag"
+        <img src="updated/portfolio-profile.jpeg" alt="Photo of Praise Nadayag"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
         <div class="initials" aria-hidden="true">PN</div>
         <div class="status">Available for projects</div>
@@ -827,7 +828,7 @@
           <div class="stats">
             <div class="stat"><b>1.5</b><span>years building websites</span></div>
             <div class="stat"><b>24/7</b><span>bookings, even while you sleep</span></div>
-            <div class="stat"><b>4</b><span>projects built, 3 live</span></div>
+            <div class="stat"><b>4</b><span>projects built, 2 live</span></div>
             <div class="stat"><b>PH</b><span>Philippines-based, works remote</span></div>
           </div>
         </div>
@@ -863,7 +864,7 @@
     <!-- ===== PROJECTS ===== -->
     <section id="projects">
       <p class="section-tag">04. projects.json</p>
-      <h2>My projects</h2>
+      <h2>Selected work</h2>
       <div class="projects">
 
         <!-- Featured project: KLX -->
@@ -889,32 +890,32 @@
               <li><span>✓</span> Gift certificate ordering</li>
             </ul>
             <div class="klx-pages">
-              <p class="pages-title">// pages I designed and built for KLX</p>
+              <p class="pages-title">// explore the live KLX experience</p>
               <div class="page-grid">
-                <a class="page-tile" href="https://klxphotobooth.space" target="_blank" rel="noopener">
-                  <div class="page-img"><span class="page-ph" aria-hidden="true">🏠</span><img src="klx-home.jpg" alt="KLX Home page screenshot" loading="lazy" onerror="this.remove()"></div>
+                <div class="page-tile">
+                  <span class="page-icon" aria-hidden="true">🏠</span>
                   <b>Home page</b><small>Receipt-style brand intro</small>
-                </a>
-                <a class="page-tile" href="https://klxphotobooth.space" target="_blank" rel="noopener">
-                  <div class="page-img"><span class="page-ph" aria-hidden="true">🏷️</span><img src="klx-rates.jpg" alt="KLX Rates &amp; packages screenshot" loading="lazy" onerror="this.remove()"></div>
+                </div>
+                <div class="page-tile">
+                  <span class="page-icon" aria-hidden="true">🏷️</span>
                   <b>Rates &amp; packages</b><small>Clear prices and best-value pick</small>
-                </a>
-                <a class="page-tile" href="https://klxphotobooth.space" target="_blank" rel="noopener">
-                  <div class="page-img"><span class="page-ph" aria-hidden="true">🗓️</span><img src="klx-booking.jpg" alt="KLX Booking calendar screenshot" loading="lazy" onerror="this.remove()"></div>
+                </div>
+                <div class="page-tile">
+                  <span class="page-icon" aria-hidden="true">🗓️</span>
                   <b>Booking calendar</b><small>Tap an open date to book</small>
-                </a>
-                <a class="page-tile" href="https://klxphotobooth.space" target="_blank" rel="noopener">
-                  <div class="page-img"><span class="page-ph" aria-hidden="true">💳</span><img src="klx-payment.jpg" alt="KLX Payment page screenshot" loading="lazy" onerror="this.remove()"></div>
+                </div>
+                <div class="page-tile">
+                  <span class="page-icon" aria-hidden="true">💳</span>
                   <b>Payment page</b><small>Auto bill, QR and proof upload</small>
-                </a>
-                <a class="page-tile" href="https://klxphotobooth.space" target="_blank" rel="noopener">
-                  <div class="page-img"><span class="page-ph" aria-hidden="true">📧</span><img src="klx-receipt.jpg" alt="KLX Email receipt screenshot" loading="lazy" onerror="this.remove()"></div>
+                </div>
+                <div class="page-tile">
+                  <span class="page-icon" aria-hidden="true">📧</span>
                   <b>Email receipt</b><small>Sent once the booking is confirmed</small>
-                </a>
-                <a class="page-tile" href="https://klxphotobooth.space" target="_blank" rel="noopener">
-                  <div class="page-img"><span class="page-ph" aria-hidden="true">🎁</span><img src="klx-giftcards.jpg" alt="KLX Gift certificates screenshot" loading="lazy" onerror="this.remove()"></div>
+                </div>
+                <div class="page-tile">
+                  <span class="page-icon" aria-hidden="true">🎁</span>
                   <b>Gift certificates</b><small>Order a booth as a gift</small>
-                </a>
+                </div>
               </div>
             </div>
             <a class="btn btn-primary visit" href="https://klxphotobooth.space" target="_blank" rel="noopener">visit_site() →</a>
@@ -925,13 +926,10 @@
         <article class="window project featured seasonal reveal">
           <div class="window-head">
             <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span class="path">klxphotobooth.space/halloween</span>
-            <span class="live season-tag">● LANDING PAGE</span>
+            <span class="path">klx / halloween-campaign</span>
+            <span class="live season-tag">● CAMPAIGN CASE STUDY</span>
           </div>
           <div class="project-body featured-body">
-            <a class="shot" href="https://klxphotobooth.space/halloween" target="_blank" rel="noopener" aria-label="Open the KLX Halloween landing page">
-              <img src="klx-halloween-preview.jpg" alt="Screenshot of the KLX Trick or Receipt Halloween landing page" loading="lazy" width="1600" height="900">
-            </a>
             <div>
               <div class="project-emoji" aria-hidden="true">🎃🧾</div>
               <h3>KLX Halloween Landing Page: "Trick or Receipt!"</h3>
@@ -947,8 +945,8 @@
               <li><span>✓</span> Custom preview when shared on Facebook</li>
             </ul>
             <div class="project-actions">
-              <a class="btn btn-primary" href="https://klxphotobooth.space/halloween" target="_blank" rel="noopener">view_page() →</a>
-              <small>// turn your volume up</small>
+              <a class="btn btn-primary" href="#contact">Discuss a landing page →</a>
+              <small>// seasonal campaign for KLX</small>
             </div>
           </div>
         </article>
@@ -976,7 +974,7 @@
               <li><span>✓</span> 50/50 hints, lives and a speed timer</li>
               <li><span>✓</span> Best score saved per mode</li>
             </ul>
-            <a class="btn btn-primary visit" href="tag-quest.html" target="_blank" rel="noopener">play_game() →</a>
+            <a class="btn btn-primary visit" href="updated/tag-quest.html" target="_blank" rel="noopener">play_game() →</a>
           </div>
         </article>
 
@@ -1022,7 +1020,7 @@
       <h2>Let's build your website</h2>
       <div class="window cta-box reveal" style="margin-bottom: 26px;">
         <h2>Tired of answering every booking by chat?</h2>
-        <p>Tell me about your business and what you need. I'll reply with a plan and a quote for a booking website that takes bookings, collects payment and sends receipts for you.</p>
+        <p>Tell me what your business does and what you want the website to handle. I'll reply with practical next steps and a quote—no pressure to commit.</p>
         <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=pnadayag.work@gmail.com&amp;su=Website%20project%20inquiry" class="btn btn-primary" target="_blank" rel="noopener">Get a free quote →</a>
       </div>
       <div class="window terminal reveal">
@@ -1042,7 +1040,7 @@
         <div class="buttons" style="justify-content: center;">
           <!-- Opens Gmail in a new tab, so it works even without an email app installed -->
           <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=pnadayag.work@gmail.com&amp;su=Website%20project%20inquiry" class="btn btn-primary" target="_blank" rel="noopener">Send me an email</a>
-          <a href="Praise%20nadayag%20new.pdf" download="Praise Nadayag CV.pdf" class="btn btn-ghost">Download my CV ↓</a>
+          <a href="updated/Praise%20nadayag%20new.pdf" download="Praise Nadayag CV.pdf" class="btn btn-ghost">Download my CV ↓</a>
           <button type="button" class="btn btn-ghost" id="copyEmail" style="background: none; font: inherit; font-family: var(--mono); font-weight: 600; font-size: 0.92rem;">copy_email()</button>
         </div>
         <p class="comment" style="margin-top: 14px;">// or use your email app: <a href="mailto:pnadayag.work@gmail.com">pnadayag.work@gmail.com</a></p>
@@ -1085,7 +1083,7 @@
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     /* ----- CV file name (change it here if you rename the PDF) ----- */
-    const CV_FILE = "Praise%20nadayag%20new.pdf";
+    const CV_FILE = "updated/Praise%20nadayag%20new.pdf";
 
     /* ----- 1. Glowing arrow follows the mouse ----- */
     const arrow = document.querySelector(".cursor-arrow");
@@ -1186,10 +1184,10 @@
       about: "<b>Praise Nadayag</b> is a website developer from Iligan City, Philippines, with <b>1.5 years</b> of experience. He builds <b>booking systems</b> with <b>online payment</b> and <b>email automation</b>: customers book and pay online, then get an email receipt once their booking is confirmed.",
       skills: "Here's what Praise works with:<ul><li>HTML5, CSS3 and JavaScript</li><li>Booking systems and email automation</li><li>Supabase for accounts and data</li><li>Responsive design that looks great on phones</li><li>GitHub and Vercel for code and deployment</li></ul>",
       experience: "Praise has <b>1.5 years</b> of experience building websites. His focus is booking systems and email automation. His live booking site is <b>KLX Receipt Photobooth</b>. He's also building <b>Tahanan</b>, a rental listing platform, and made <b>Tag Quest</b>, a game that teaches HTML.",
-      projects: "Here are Praise's projects:<ul><li><b>KLX Receipt Photobooth</b> (live): a booking website with a calendar, auto billing, QR payment and email confirmation</li><li><b>KLX Halloween landing page</b> (live): a \"Trick or Receipt\" campaign page with spooky effects and booking links</li><li><b>Tahanan</b> (in development): a rental listing platform for boarding houses and rooms in Iligan City</li><li><b>Tag Quest</b> (live): a game for students and beginners learning HTML</li></ul>Ask me about any of them!",
-      tagquest: "<b>Tag Quest</b> 🎮 is a browser game for anyone who wants to learn or get familiar with HTML.<ul><li>Pick <b>Easy</b>, <b>Normal</b> or <b>Hard</b> mode</li><li>Answer tag challenges by choosing or typing the right tag</li><li>See the correct answer and a short explanation every time</li><li>Use 50/50 hints in Easy, beat the 20-second timer in Hard</li><li>Your best score is saved for each mode</li></ul>It's live, <a href='tag-quest.html' target='_blank' rel='noopener'>play it here</a>!",
+      projects: "Here are Praise's projects:<ul><li><b>KLX Receipt Photobooth</b> (live): a booking website with a calendar, auto billing, QR payment and email confirmation</li><li><b>KLX Halloween landing page</b>: a \"Trick or Receipt\" seasonal campaign case study with interactive effects and booking-focused design</li><li><b>Tahanan</b> (in development): a rental listing platform for boarding houses and rooms in Iligan City</li><li><b>Tag Quest</b> (live): a game for students and beginners learning HTML</li></ul>Ask me about any of them!",
+      tagquest: "<b>Tag Quest</b> 🎮 is a browser game for anyone who wants to learn or get familiar with HTML.<ul><li>Pick <b>Easy</b>, <b>Normal</b> or <b>Hard</b> mode</li><li>Answer tag challenges by choosing or typing the right tag</li><li>See the correct answer and a short explanation every time</li><li>Use 50/50 hints in Easy, beat the 20-second timer in Hard</li><li>Your best score is saved for each mode</li></ul>It's live, <a href='updated/tag-quest.html' target='_blank' rel='noopener'>play it here</a>!",
       klx: "<b>KLX Receipt Photobooth</b> 🧾📸 is a full booking website for a photobooth business in Iligan City. Customers can:<ul><li>Pick an open date on a live calendar</li><li>Fill out a booking form with add-ons</li><li>See their total and 50% downpayment computed automatically</li><li>Pay by QR and upload proof of payment</li><li>Get their booking confirmation by email</li></ul>It also has gift certificate ordering and mini games. See it live at <a href='https://klxphotobooth.space' target='_blank' rel='noopener'>klxphotobooth.space</a>",
-      halloween: "<b>Trick or Receipt!</b> 🎃 is a Halloween landing page Praise built for KLX to get more party bookings.<ul><li>Spooky hero with a flashlight effect, fog and cobwebs</li><li>Suspense music made in the browser</li><li>A Trick or Treat fortune machine</li><li>Promo countdown, rates, and Book buttons linked to the booking calendar</li></ul><a href='https://klxphotobooth.space/halloween' target='_blank' rel='noopener'>See it here</a> (turn your volume up!)",
+      halloween: "<b>Trick or Receipt!</b> 🎃 is a seasonal landing page case study Praise built for KLX, with a booking-focused campaign and interactive Halloween details. You can read about it in the <a href='#projects'>projects section</a>.",
       tahanan: "<b>Tahanan</b> 🏠 is a rental listing platform for boarding houses, rooms and small houses in Iligan City, like Airbnb for local rentals.<ul><li>Owners create an account and post their place with photos, rates, house rules and a Google Maps pin</li><li>Owners choose their target tenants (students or workers)</li><li>Owners are verified with a valid ID and business permit</li><li>An admin approves listings before they go live</li></ul>It's <b>in development</b> right now, with the backend being built on Supabase. Launching soon!",
       booking: "Here's how Praise's booking websites work:<ul><li><b>1.</b> The customer books online, any time of day</li><li><b>2.</b> The system saves the booking automatically</li><li><b>3.</b> A receipt confirmation lands in their email within seconds</li></ul>No manual typing, no missed messages. Bookings 24/7, even while you sleep. 😴",
       contact: "You can reach Praise here:<ul><li>📧 " + emailLink + "</li><li>📱 <a href='tel:09351265931'>0935 126 5931</a></li><li>📍 Iligan City, Lanao del Norte, Philippines</li></ul>",
